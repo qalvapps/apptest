@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DataManager.h"
 
 #define kDefaultCellID @"DefaultCell"
 
@@ -48,6 +49,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [self.theTable dequeueReusableCellWithIdentifier:kDefaultCellID];
+    /*
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSURLSessionDataTask *dataTask = [_session dataTaskWithURL:url
+                                             completionHandler:^(NSData *data, NSURLResponse *response,
+                                                                 NSError *error) {
+                                                 if (!error) {
+                                                     UIImage *image = [[UIImage alloc] initWithData:data];
+                                                     photo.thumbNail = image;
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                                         cell.thumbnailImage.image = photo.thumbNail;
+                                                     });
+                                                 } else {
+                                                     // HANDLE ERROR //
+                                                 }
+                                             }];
+    [dataTask resume];
+    */
     
     return cell;
     

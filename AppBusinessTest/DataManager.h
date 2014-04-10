@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataManager : NSObject
+@interface DataManager : NSObject <NSURLSessionDataDelegate>
+
+@property (nonatomic, strong) NSURLSession *theURLSession;
+@property (nonatomic, strong) NSMutableArray *theEmployees;
 
 @property dispatch_queue_t backgroundQueue;
 

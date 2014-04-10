@@ -25,6 +25,15 @@
 		3601796F18F6E99900B293A4 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601796D18F6E99900B293A4 /* DataManager.m */; };
 		3601797218F6EB8900B293A4 /* BiographyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797118F6EB8900B293A4 /* BiographyTableViewCell.m */; };
 		3601797318F6EB8900B293A4 /* BiographyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797118F6EB8900B293A4 /* BiographyTableViewCell.m */; };
+		3601797618F7004F00B293A4 /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797518F7004F00B293A4 /* Employee.m */; };
+		3601797718F7004F00B293A4 /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797518F7004F00B293A4 /* Employee.m */; };
+		3601797C18F7019B00B293A4 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3601797B18F7019B00B293A4 /* libxml2.dylib */; };
+		3601798218F7020700B293A4 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797F18F7020700B293A4 /* TFHpple.m */; };
+		3601798318F7020700B293A4 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601797F18F7020700B293A4 /* TFHpple.m */; };
+		3601798418F7020700B293A4 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798118F7020700B293A4 /* TFHppleElement.m */; };
+		3601798518F7020700B293A4 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798118F7020700B293A4 /* TFHppleElement.m */; };
+		3601798818F7021600B293A4 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798718F7021600B293A4 /* XPathQuery.m */; };
+		3601798918F7021600B293A4 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798718F7021600B293A4 /* XPathQuery.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +70,15 @@
 		3601796D18F6E99900B293A4 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		3601797018F6EB8900B293A4 /* BiographyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiographyTableViewCell.h; sourceTree = "<group>"; };
 		3601797118F6EB8900B293A4 /* BiographyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiographyTableViewCell.m; sourceTree = "<group>"; };
+		3601797418F7004F00B293A4 /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
+		3601797518F7004F00B293A4 /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
+		3601797B18F7019B00B293A4 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		3601797E18F7020700B293A4 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		3601797F18F7020700B293A4 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		3601798018F7020700B293A4 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		3601798118F7020700B293A4 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		3601798618F7021600B293A4 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		3601798718F7021600B293A4 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3601797C18F7019B00B293A4 /* libxml2.dylib in Frameworks */,
 				3601793A18F6E90700B293A4 /* CoreGraphics.framework in Frameworks */,
 				3601793C18F6E90700B293A4 /* UIKit.framework in Frameworks */,
 				3601793818F6E90700B293A4 /* Foundation.framework in Frameworks */,
@@ -109,6 +128,7 @@
 		3601793618F6E90700B293A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3601797B18F7019B00B293A4 /* libxml2.dylib */,
 				3601793718F6E90700B293A4 /* Foundation.framework */,
 				3601793918F6E90700B293A4 /* CoreGraphics.framework */,
 				3601793B18F6E90700B293A4 /* UIKit.framework */,
@@ -120,15 +140,15 @@
 		3601793D18F6E90700B293A4 /* AppBusinessTest */ = {
 			isa = PBXGroup;
 			children = (
+				3601797D18F701BE00B293A4 /* hpple */,
+				3601797A18F7017D00B293A4 /* Views */,
+				3601797918F7016D00B293A4 /* Helpers */,
+				3601797818F7015F00B293A4 /* Model */,
 				3601794618F6E90700B293A4 /* AppDelegate.h */,
 				3601794718F6E90700B293A4 /* AppDelegate.m */,
 				3601794918F6E90700B293A4 /* Main.storyboard */,
 				3601794C18F6E90700B293A4 /* ViewController.h */,
 				3601794D18F6E90700B293A4 /* ViewController.m */,
-				3601797018F6EB8900B293A4 /* BiographyTableViewCell.h */,
-				3601797118F6EB8900B293A4 /* BiographyTableViewCell.m */,
-				3601796C18F6E99900B293A4 /* DataManager.h */,
-				3601796D18F6E99900B293A4 /* DataManager.m */,
 				3601794F18F6E90700B293A4 /* Images.xcassets */,
 				3601793E18F6E90700B293A4 /* Supporting Files */,
 			);
@@ -162,6 +182,46 @@
 				3601795F18F6E90700B293A4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3601797818F7015F00B293A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3601797418F7004F00B293A4 /* Employee.h */,
+				3601797518F7004F00B293A4 /* Employee.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3601797918F7016D00B293A4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3601796C18F6E99900B293A4 /* DataManager.h */,
+				3601796D18F6E99900B293A4 /* DataManager.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		3601797A18F7017D00B293A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3601797018F6EB8900B293A4 /* BiographyTableViewCell.h */,
+				3601797118F6EB8900B293A4 /* BiographyTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3601797D18F701BE00B293A4 /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				3601797E18F7020700B293A4 /* TFHpple.h */,
+				3601797F18F7020700B293A4 /* TFHpple.m */,
+				3601798018F7020700B293A4 /* TFHppleElement.h */,
+				3601798118F7020700B293A4 /* TFHppleElement.m */,
+				3601798618F7021600B293A4 /* XPathQuery.h */,
+				3601798718F7021600B293A4 /* XPathQuery.m */,
+			);
+			name = hpple;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +321,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3601798418F7020700B293A4 /* TFHppleElement.m in Sources */,
 				3601797218F6EB8900B293A4 /* BiographyTableViewCell.m in Sources */,
 				3601794E18F6E90700B293A4 /* ViewController.m in Sources */,
 				3601796E18F6E99900B293A4 /* DataManager.m in Sources */,
+				3601798818F7021600B293A4 /* XPathQuery.m in Sources */,
+				3601798218F7020700B293A4 /* TFHpple.m in Sources */,
+				3601797618F7004F00B293A4 /* Employee.m in Sources */,
 				3601794818F6E90700B293A4 /* AppDelegate.m in Sources */,
 				3601794418F6E90700B293A4 /* main.m in Sources */,
 			);
@@ -273,7 +337,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3601798518F7020700B293A4 /* TFHppleElement.m in Sources */,
+				3601798918F7021600B293A4 /* XPathQuery.m in Sources */,
+				3601798318F7020700B293A4 /* TFHpple.m in Sources */,
 				3601796318F6E90700B293A4 /* AppBusinessTestTests.m in Sources */,
+				3601797718F7004F00B293A4 /* Employee.m in Sources */,
 				3601796F18F6E99900B293A4 /* DataManager.m in Sources */,
 				3601797318F6EB8900B293A4 /* BiographyTableViewCell.m in Sources */,
 			);
@@ -349,6 +417,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
