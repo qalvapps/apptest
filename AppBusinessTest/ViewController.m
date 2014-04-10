@@ -10,8 +10,11 @@
 #import "DataManager.h"
 #import "BiographyTableViewCell.h"
 #import "Employee.h"
+#import "Utility.h"
 
 #define kDefaultCellID @"DefaultCell"
+#define kImageSizeThreshold 500
+#define kImageWidthHeight 10
 
 @interface ViewController ()
 
@@ -120,11 +123,21 @@
                                                          
                                                          UIImage *image = [[UIImage alloc] initWithData:data];
                                                          
+                                                         // resize image
+                                                         
+                                                         UIImage *imageForUse;
+                                                         
+                                                         if ((image.size.width > kImageSizeThreshold) || (image.size.height > kImageSizeThreshold) ) {
+                                                             imageForUse = [Utility resizeImage:image resizeSize:CGSizeMake(kImageWidthHeight, kImageWidthHeight)];
+                                                         } else {
+                                                             imageForUse = image;
+                                                         }
+                                                         
                                                          dispatch_async(dispatch_get_main_queue(), ^{
                                                              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                                             cell.profileImage.image = image;
+                                                             cell.profileImage.image = imageForUse;
                                                              
-                                                             self.cachedImages[imageURL] = image;
+                                                             self.cachedImages[imageURL] = imageForUse;
                                                              
                                                              cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
                                                              cell.profileImage.clipsToBounds = YES;

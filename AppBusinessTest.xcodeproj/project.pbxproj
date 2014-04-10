@@ -35,6 +35,8 @@
 		3601798918F7021600B293A4 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798718F7021600B293A4 /* XPathQuery.m */; };
 		3601798B18F71AEE00B293A4 /* DataDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798A18F71AEE00B293A4 /* DataDownload.m */; };
 		3601798C18F71DB800B293A4 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3601797B18F7019B00B293A4 /* libxml2.dylib */; };
+		3601798F18F7352600B293A4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798E18F7352600B293A4 /* Utility.m */; };
+		3601799018F7352600B293A4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3601798E18F7352600B293A4 /* Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		3601798618F7021600B293A4 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		3601798718F7021600B293A4 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		3601798A18F71AEE00B293A4 /* DataDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataDownload.m; sourceTree = "<group>"; };
+		3601798D18F7352600B293A4 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		3601798E18F7352600B293A4 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 			children = (
 				3601796C18F6E99900B293A4 /* DataManager.h */,
 				3601796D18F6E99900B293A4 /* DataManager.m */,
+				3601798D18F7352600B293A4 /* Utility.h */,
+				3601798E18F7352600B293A4 /* Utility.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			files = (
 				3601798418F7020700B293A4 /* TFHppleElement.m in Sources */,
 				3601797218F6EB8900B293A4 /* BiographyTableViewCell.m in Sources */,
+				3601798F18F7352600B293A4 /* Utility.m in Sources */,
 				3601794E18F6E90700B293A4 /* ViewController.m in Sources */,
 				3601796E18F6E99900B293A4 /* DataManager.m in Sources */,
 				3601798818F7021600B293A4 /* XPathQuery.m in Sources */,
@@ -339,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3601799018F7352600B293A4 /* Utility.m in Sources */,
 				3601798518F7020700B293A4 /* TFHppleElement.m in Sources */,
 				3601798918F7021600B293A4 /* XPathQuery.m in Sources */,
 				3601798318F7020700B293A4 /* TFHpple.m in Sources */,
