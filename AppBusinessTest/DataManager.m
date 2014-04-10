@@ -26,7 +26,7 @@
 	return sharedDataManager;
 }
 
-- (void)fetch {
+- (void)fetchWithCompletion:(void (^)(NSArray *employees, NSError *error))completion {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -74,10 +74,17 @@
                     [self.theEmployees addObject:anEmployee];
                 }
                 
-                NSLog(@"theEmployess %@",self.theEmployees);
+                //NSLog(@"theEmployess %@",self.theEmployees);
+                
+                if (completion) {
+                    completion(self.theEmployees, nil);
+                }
             }
         } else {
             // handle error
+            if (completion) {
+                completion(nil, error);
+            }
         }
     }];
     

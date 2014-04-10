@@ -12,7 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *profileImage;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *deptLabel;
+@property (nonatomic, weak) IBOutlet UILabel *roleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *bioLabel;
 
 @end

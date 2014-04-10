@@ -17,6 +17,6 @@
 
 + (DataManager *)sharedDataManager;
 
-- (void)fetch;
+- (void)fetchWithCompletion:(void (^)(NSArray *employees, NSError *error))completion;
 
 @end

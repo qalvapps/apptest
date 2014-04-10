@@ -1,18 +1,19 @@
 //
-//  AppBusinessTestTests.m
-//  AppBusinessTestTests
+//  DataDownload.m
+//  AppBusinessTest
 //
 //  Created by paul calver on 10/04/2014.
 //  Copyright (c) 2014 paul calver. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
+#import "DataManager.h"
 
-@interface AppBusinessTestTests : XCTestCase
+@interface DataDownload : XCTestCase
 
 @end
 
-@implementation AppBusinessTestTests
+@implementation DataDownload
 
 - (void)setUp
 {
@@ -26,9 +27,14 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testDownloadAndCreateEmployeeObjects
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    [[DataManager sharedDataManager] fetchWithCompletion:^(NSArray *employees, NSError *error) {
+        if(error){
+            XCTFail(@"Failure for testDownloadAndCreateEmployeeObjects: %@",[error localizedDescription]);
+        }
+    }];
+    
 }
 
 @end

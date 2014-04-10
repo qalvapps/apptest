@@ -15,8 +15,6 @@
 {
     // Override point for customization after application launch.
     
-    [[DataManager sharedDataManager] fetch];
-    
     return YES;
 }
 							
