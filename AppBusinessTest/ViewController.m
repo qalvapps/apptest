@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSURLSession *theSession;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *cachedImages;
+@property (nonatomic, strong) BiographyTableViewCell *prototypeCell;
 @end
 
 @implementation ViewController
@@ -53,11 +54,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell isKindOfClass:[BiographyTableViewCell class]])
+    {
+        BiographyTableViewCell *biogCell = (BiographyTableViewCell *)cell;
+        
+        Employee *anEmployee = self.dataSource[indexPath.row];
+        
+        if (anEmployee) {
+            biogCell.nameLabel.text = anEmployee.empName;
+            biogCell.roleLabel.text = anEmployee.empRole;
+            biogCell.bioLabel.text = anEmployee.empBio;
+
+        }
+    }
+}
+
 #pragma mark tableview
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
     
-    return 60.0f;
+    NSDictionary *attributes = @{NSFontAttributeName:self.prototypeCell.bioLabel.font};
+    CGRect rect = [self.prototypeCell.bioLabel.text boundingRectWithSize:CGSizeMake(self.prototypeCell.bioLabel.frame.size.width, MAXFLOAT)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:attributes
+                                              context:nil];
+    return rect.size.height + 100;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -73,11 +98,7 @@
     
     Employee *anEmployee = self.dataSource[indexPath.row];
     
-    if (anEmployee) {
-        cell.nameLabel.text = anEmployee.empName;
-        cell.roleLabel.text = anEmployee.empRole;
-        cell.bioLabel.text = anEmployee.empBio;
-    }
+    [self configureCell:cell forRowAtIndexPath:indexPath];
     
     NSString *imageURL = anEmployee.empProfileImage;
     
@@ -105,6 +126,9 @@
                                                              
                                                              self.cachedImages[imageURL] = image;
                                                              
+                                                             cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
+                                                             cell.profileImage.clipsToBounds = YES;
+                                                             
                                                          });
                                                      } else {
                                                          // HANDLE ERROR //
@@ -116,6 +140,20 @@
     
     return cell;
     
+}
+
+- (BiographyTableViewCell *)prototypeCell
+{
+    if (!_prototypeCell)
+    {
+        _prototypeCell = [self.theTable dequeueReusableCellWithIdentifier:kDefaultCellID];
+    }
+    return _prototypeCell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
 }
 
 @end

@@ -21,37 +21,58 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultCell" rowHeight="120" id="lot-tB-c18" customClass="BiographyTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="120"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultCell" rowHeight="112" id="lot-tB-c18" customClass="BiographyTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lot-tB-c18" id="Ruk-DP-ddS">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMR-aQ-glK" userLabel="Image View - profile">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMR-aQ-glK" userLabel="Image View - profile">
                                                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="cH9-hS-ev2"/>
+                                                        <constraint firstAttribute="width" constant="60" id="oTM-if-8kd"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUh-0Q-evA" userLabel="Label - name">
-                                                    <rect key="frame" x="80" y="10" width="230" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUh-0Q-evA" userLabel="Label - name">
+                                                    <rect key="frame" x="80" y="10" width="230" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waw-sT-TgW" userLabel="Label - role">
-                                                    <rect key="frame" x="80" y="43" width="230" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waw-sT-TgW" userLabel="Label - role">
+                                                    <rect key="frame" x="80" y="30" width="230" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="qjS-1k-36A" userLabel="Label - bio">
-                                                    <rect key="frame" x="10" y="82" width="300" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="qjS-1k-36A" userLabel="Label - bio">
+                                                    <rect key="frame" x="10" y="80" width="300" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="ujw-xn-bIQ"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Waw-sT-TgW" firstAttribute="top" secondItem="MUh-0Q-evA" secondAttribute="bottom" constant="2" id="6sJ-DM-NES"/>
+                                                <constraint firstItem="Waw-sT-TgW" firstAttribute="trailing" secondItem="qjS-1k-36A" secondAttribute="trailing" id="8S5-cT-9ta"/>
+                                                <constraint firstAttribute="trailing" secondItem="qjS-1k-36A" secondAttribute="trailing" constant="10" id="9iX-ep-T1M"/>
+                                                <constraint firstAttribute="bottom" secondItem="qjS-1k-36A" secondAttribute="bottom" constant="10" id="ZpY-eA-cUh"/>
+                                                <constraint firstItem="SMR-aQ-glK" firstAttribute="top" secondItem="Ruk-DP-ddS" secondAttribute="top" constant="10" id="ihN-SB-kTf"/>
+                                                <constraint firstItem="qjS-1k-36A" firstAttribute="leading" secondItem="Ruk-DP-ddS" secondAttribute="leading" constant="10" id="m0a-Fs-9aO"/>
+                                                <constraint firstItem="qjS-1k-36A" firstAttribute="top" secondItem="SMR-aQ-glK" secondAttribute="bottom" constant="10" id="mat-AY-LPa"/>
+                                                <constraint firstItem="SMR-aQ-glK" firstAttribute="leading" secondItem="qjS-1k-36A" secondAttribute="leading" id="nop-cY-kPH"/>
+                                                <constraint firstItem="SMR-aQ-glK" firstAttribute="top" secondItem="MUh-0Q-evA" secondAttribute="top" id="rck-Dz-DNH"/>
+                                                <constraint firstItem="Waw-sT-TgW" firstAttribute="trailing" secondItem="MUh-0Q-evA" secondAttribute="trailing" id="tvT-f8-V3u"/>
+                                                <constraint firstItem="Waw-sT-TgW" firstAttribute="leading" secondItem="SMR-aQ-glK" secondAttribute="trailing" constant="10" id="wsP-OB-YOb"/>
+                                                <constraint firstItem="Waw-sT-TgW" firstAttribute="leading" secondItem="MUh-0Q-evA" secondAttribute="leading" id="yc8-95-xF7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bioLabel" destination="qjS-1k-36A" id="VI2-CB-KhH"/>

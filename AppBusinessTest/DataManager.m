@@ -13,6 +13,9 @@
 // this would ordinarly be defined in a seperate constants file but as its the only constant as such, stick it here
 
 #define kDataSourceURL @"http://www.theappbusiness.com/our-team/"
+#define kPersistedDataFilename @"currentemployees.txt"
+#define kArchiveObjectKey @"EmployeeData"
+#define kArchiveDataKey @"emplyees"
 
 @implementation DataManager
 
@@ -43,6 +46,8 @@
         if (!error) {
             
             if ([data length] > 0) {
+                
+                NSLog(@"all good. unpack and create employee objects");
                 
                 self.theEmployees = [NSMutableArray array];
                 
@@ -76,19 +81,84 @@
                 
                 //NSLog(@"theEmployess %@",self.theEmployees);
                 
+                [self deleteArchivedData];
+                [self archiveModelData];
+                
                 if (completion) {
                     completion(self.theEmployees, nil);
                 }
             }
         } else {
             // handle error
+            NSLog(@"error. unarchiving data");
+            
+            [self readArchivedModelData];
+            
             if (completion) {
-                completion(nil, error);
+                completion(self.theEmployees, nil);
             }
         }
     }];
     
     [getDataTask resume];
+}
+
+#pragma mark simple archiving
+
+// PC note ordinarily i would probs use core data but this wil suffice for the test
+
+-(void)deleteArchivedData {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    
+    NSError *error = nil;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+
+}
+
+- (void)archiveModelData {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    
+    NSMutableDictionary *dataToSave = [NSMutableDictionary dictionary];
+    
+    if (self.theEmployees) {
+        [dataToSave setObject:self.theEmployees forKey:kArchiveDataKey];
+    }
+    
+    NSMutableData *data = [NSMutableData data];
+    NSKeyedArchiver *archive = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+    [archive encodeObject:dataToSave forKey:kArchiveObjectKey];
+    [archive finishEncoding];
+    
+    BOOL result = [data writeToFile:filePath atomically:YES];
+    
+    NSLog(result ? @"YES" : @"NO");
+}
+
+- (void)readArchivedModelData {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    
+    NSData* codedData = [[NSData alloc] initWithContentsOfFile:filePath];
+    
+    if (codedData != NULL) {
+        NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:codedData];
+        
+        NSDictionary* unarchivedModelData = [unarchiver decodeObjectForKey:kArchiveObjectKey];
+        
+        if (([unarchivedModelData objectForKey:kArchiveDataKey]) && ([unarchivedModelData objectForKey:kArchiveDataKey] != [NSNull null])) {
+            NSArray *dataArray = [unarchivedModelData objectForKey:kArchiveDataKey];
+            self.theEmployees = [[NSMutableArray alloc] initWithArray:dataArray];
+        }
+    }
 }
 
 @end

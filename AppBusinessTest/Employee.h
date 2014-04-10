@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Employee : NSObject
+@interface Employee : NSObject<NSCoding>
 
 @property (nonatomic, copy) NSString *empProfileImage;
 @property (nonatomic, copy) NSString *empName;
