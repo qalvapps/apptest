@@ -18,5 +18,9 @@
 + (DataManager *)sharedDataManager;
 
 - (void)fetchWithCompletion:(void (^)(NSArray *employees, NSError *error))completion;
+- (NSArray*)employeesFromHtmlData:(NSData*)data;
+- (BOOL)deleteArchivedDataWithFilename:(NSString*)filename;
+- (BOOL)archiveModelData:(NSArray*)theData withFilename:(NSString*)filename;
+- (NSArray*)employeesFromArchivedModelDataWithFilename:(NSString*)filename;
 
 @end

@@ -49,40 +49,15 @@
                 
                 NSLog(@"all good. unpack and create employee objects");
                 
-                self.theEmployees = [NSMutableArray array];
-                
-                TFHpple *htmlParser = [TFHpple hppleWithHTMLData:data];
-                NSString *usersXpathQueryString = @"//section [@id='users']/div[@class='wrapper']/div[@class='row']/div[@class='col col2']";
-                //NSString *imagesXpathQueryString = @"//section [@id='users']/div[@class='wrapper']/div[@class='row']/div[@class='col col2']/div[@class='title']//img/@src";
-                NSArray *usersNodes = [htmlParser searchWithXPathQuery:usersXpathQueryString];
-
-                for (TFHppleElement * element in usersNodes) {
-                    
-                    TFHppleElement *imgElement = [[element firstChildWithClassName:@"title"] firstChildWithTagName:@"img"];
-                    
-                    NSString *src = [imgElement objectForKey:@"src"];
-                    NSString *name = [element firstChildWithTagName:@"h3"].text;
-                    NSString *role = [element firstChildWithTagName:@"p"].text;
-                    NSString *bio = [element firstChildWithClassName:@"user-description"].text;
-                    
-                    //NSLog(@"src: %@", src);
-                    //NSLog(@"name is: %@", name);
-                    //NSLog(@"role: %@", role);
-                    //NSLog(@"bio: %@", bio);
-                    
-                    Employee *anEmployee = [[Employee alloc] init];
-                    anEmployee.empProfileImage = src;
-                    anEmployee.empName = name;
-                    anEmployee.empRole = role;
-                    anEmployee.empBio = bio;
-                    
-                    [self.theEmployees addObject:anEmployee];
-                }
-                
+                self.theEmployees = [NSMutableArray arrayWithArray:[self employeesFromHtmlData:data]];
+            
                 //NSLog(@"theEmployess %@",self.theEmployees);
                 
-                [self deleteArchivedData];
-                [self archiveModelData];
+                if ([self deleteArchivedDataWithFilename:kPersistedDataFilename]) {
+                    [self archiveModelData:self.theEmployees withFilename:kPersistedDataFilename];
+                } else {
+                    // handle error
+                }
                 
                 if (completion) {
                     completion(self.theEmployees, nil);
@@ -92,7 +67,7 @@
             // handle error
             NSLog(@"error. unarchiving data");
             
-            [self readArchivedModelData];
+            self.theEmployees = [NSMutableArray arrayWithArray:[self employeesFromArchivedModelDataWithFilename:kPersistedDataFilename]];
             
             if (completion) {
                 completion(self.theEmployees, nil);
@@ -103,32 +78,78 @@
     [getDataTask resume];
 }
 
-#pragma mark simple archiving
+#pragma mark turn html into employee objects
 
-// PC note ordinarily i would probs use core data but this wil suffice for the test
-
--(void)deleteArchivedData {
+- (NSArray*)employeesFromHtmlData:(NSData*)data {
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    NSMutableArray *retArray = [NSMutableArray array];
     
-    NSError *error = nil;
+    TFHpple *htmlParser = [TFHpple hppleWithHTMLData:data];
+    NSString *usersXpathQueryString = @"//section [@id='users']/div[@class='wrapper']/div[@class='row']/div[@class='col col2']";
+    //NSString *imagesXpathQueryString = @"//section [@id='users']/div[@class='wrapper']/div[@class='row']/div[@class='col col2']/div[@class='title']//img/@src";
+    NSArray *usersNodes = [htmlParser searchWithXPathQuery:usersXpathQueryString];
     
-    [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-
+    for (TFHppleElement * element in usersNodes) {
+        
+        TFHppleElement *imgElement = [[element firstChildWithClassName:@"title"] firstChildWithTagName:@"img"];
+        
+        NSString *src = [imgElement objectForKey:@"src"];
+        NSString *name = [element firstChildWithTagName:@"h3"].text;
+        NSString *role = [element firstChildWithTagName:@"p"].text;
+        NSString *bio = [element firstChildWithClassName:@"user-description"].text;
+        
+        //NSLog(@"src: %@", src);
+        //NSLog(@"name is: %@", name);
+        //NSLog(@"role: %@", role);
+        //NSLog(@"bio: %@", bio);
+        
+        Employee *anEmployee = [[Employee alloc] init];
+        anEmployee.empProfileImage = src;
+        anEmployee.empName = name;
+        anEmployee.empRole = role;
+        anEmployee.empBio = bio;
+        
+        [retArray addObject:anEmployee];
+    }
+    
+    return retArray;
 }
 
-- (void)archiveModelData {
+#pragma mark simple archiving
+
+// PC note ordinarily i would probs use core data but this will suffice for the test
+
+- (BOOL)deleteArchivedDataWithFilename:(NSString*)filename {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    
+    if (fileExists) {
+        NSError *error = nil;
+        
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+        
+        if (error) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)archiveModelData:(NSArray*)theData withFilename:(NSString*)filename {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
     
     NSMutableDictionary *dataToSave = [NSMutableDictionary dictionary];
     
-    if (self.theEmployees) {
-        [dataToSave setObject:self.theEmployees forKey:kArchiveDataKey];
+    if (theData) {
+        [dataToSave setObject:theData forKey:kArchiveDataKey];
     }
     
     NSMutableData *data = [NSMutableData data];
@@ -138,14 +159,14 @@
     
     BOOL result = [data writeToFile:filePath atomically:YES];
     
-    NSLog(result ? @"YES" : @"NO");
+    return result;    
 }
 
-- (void)readArchivedModelData {
+- (NSArray*)employeesFromArchivedModelDataWithFilename:(NSString*)filename {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,kPersistedDataFilename];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
     
     NSData* codedData = [[NSData alloc] initWithContentsOfFile:filePath];
     
@@ -156,9 +177,11 @@
         
         if (([unarchivedModelData objectForKey:kArchiveDataKey]) && ([unarchivedModelData objectForKey:kArchiveDataKey] != [NSNull null])) {
             NSArray *dataArray = [unarchivedModelData objectForKey:kArchiveDataKey];
-            self.theEmployees = [[NSMutableArray alloc] initWithArray:dataArray];
+            return dataArray;
         }
     }
+    
+    return nil;
 }
 
 @end

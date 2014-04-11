@@ -8,6 +8,13 @@
 
 #import <XCTest/XCTest.h>
 #import "DataManager.h"
+#import "Employee.h"
+
+#define kTestPersistedDataFilename @"testcurrentemployees.txt"
+#define kTestEmpName @"Paul"
+#define kTestEmpRole @"CEO"
+#define kTestEmpBio @"Born Awesome"
+#define kTestProfileImage @""
 
 @interface DataDownload : XCTestCase
 
@@ -35,6 +42,47 @@
         }
     }];
     
+}
+
+- (void)testDeleteEmployeeArchive {
+    
+    BOOL result = [[DataManager sharedDataManager] deleteArchivedDataWithFilename:kTestPersistedDataFilename];
+    
+    if (!result){
+        XCTFail(@"Failure for testDeleteEmployeeArchive");
+    }
+}
+
+- (void)testEmployeeArchive {
+    
+    Employee *testEmployee = [[Employee alloc] init];
+    testEmployee.empName = kTestEmpName;
+    testEmployee.empRole = kTestEmpRole;
+    testEmployee.empBio = kTestEmpBio;
+    testEmployee.empProfileImage = kTestProfileImage;
+    
+    BOOL result = [[DataManager sharedDataManager] archiveModelData:@[testEmployee] withFilename:kTestPersistedDataFilename];
+    
+    if (!result){
+        XCTFail(@"testEmployeeArchive");
+    }
+}
+
+- (void)testEmployeeUnArchive {
+    
+    NSArray *testEmployees = [[DataManager sharedDataManager] employeesFromArchivedModelDataWithFilename:kTestPersistedDataFilename];
+    
+    if (!testEmployees){
+        XCTFail(@"testEmployeeArchive no employees");
+    } else {
+        Employee *testEmployee = testEmployees[0];
+    
+        if ([testEmployee.empName isEqualToString:kTestEmpName] && [testEmployee.empRole isEqualToString:kTestEmpRole] && [testEmployee.empBio isEqualToString:kTestEmpBio] ) {
+            
+        } else {
+            XCTFail(@"testEmployeeArchive not expected employee");
+        }
+    }
 }
 
 @end
