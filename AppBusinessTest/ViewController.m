@@ -14,7 +14,7 @@
 
 #define kDefaultCellID @"DefaultCell"
 #define kImageSizeThreshold 500
-#define kImageWidthHeight 10
+#define kImageWidthHeight 60
 
 @interface ViewController ()
 
@@ -106,6 +106,9 @@
     NSString *imageURL = anEmployee.empProfileImage;
     
     if ([imageURL length] > 0) {
+        
+        
+        // would hash the string to be used as a key oridinarily but will just use string for test
         
         if (self.cachedImages[imageURL] != nil) {
             
