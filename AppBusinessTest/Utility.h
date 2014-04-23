@@ -10,6 +10,4 @@
 
 @interface Utility : NSObject
 
-+ (UIImage *)resizeImage:(UIImage *)orginalImage resizeSize:(CGSize)size;
-
 @end

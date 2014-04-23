@@ -121,10 +121,8 @@
 
 - (BOOL)deleteArchivedDataWithFilename:(NSString*)filename {
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
-    
+    NSString *filePath = [self docFilePath:filename];
+
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
     
     if (fileExists) {
@@ -142,10 +140,8 @@
 
 - (BOOL)archiveModelData:(NSArray*)theData withFilename:(NSString*)filename {
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
-    
+    NSString *filePath = [self docFilePath:filename];
+
     NSMutableDictionary *dataToSave = [NSMutableDictionary dictionary];
     
     if (theData) {
@@ -164,9 +160,7 @@
 
 - (NSArray*)employeesFromArchivedModelDataWithFilename:(NSString*)filename {
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
+    NSString *filePath = [self docFilePath:filename];
     
     NSData* codedData = [[NSData alloc] initWithContentsOfFile:filePath];
     
@@ -182,6 +176,15 @@
     }
     
     return nil;
+}
+
+- (NSString*)docFilePath:(NSString*)filename {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",documentsDirectory,filename];
+    
+    return filePath;
 }
 
 @end

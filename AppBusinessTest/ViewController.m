@@ -10,7 +10,7 @@
 #import "DataManager.h"
 #import "BiographyTableViewCell.h"
 #import "Employee.h"
-#import "Utility.h"
+#import "UIImage+Tools.h"
 
 #define kDefaultCellID @"DefaultCell"
 #define kImageSizeThreshold 500
@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) NSURLSession *theSession;
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) NSMutableDictionary *cachedImages;
+@property (nonatomic, strong) NSCache *cachedImages;
 @property (nonatomic, strong) BiographyTableViewCell *prototypeCell;
 @end
 
@@ -41,7 +41,7 @@
         if (!error) {
             NSLog(@"employees %@",employees);
             
-            self.cachedImages = [NSMutableDictionary dictionary];
+            self.cachedImages = [[NSCache alloc] init];
             self.dataSource = [NSMutableArray arrayWithArray:[employees copy]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -110,9 +110,9 @@
         
         // would hash the string to be used as a key oridinarily but will just use string for test
         
-        if (self.cachedImages[imageURL] != nil) {
+        if ([self.cachedImages objectForKey:imageURL] != nil) {
             
-            cell.profileImage.image = self.cachedImages[imageURL];
+            cell.profileImage.image = [self.cachedImages objectForKey:imageURL];
             
         } else {
         
@@ -131,21 +131,25 @@
                                                          UIImage *imageForUse;
                                                          
                                                          if ((image.size.width > kImageSizeThreshold) || (image.size.height > kImageSizeThreshold) ) {
-                                                             imageForUse = [Utility resizeImage:image resizeSize:CGSizeMake(kImageWidthHeight, kImageWidthHeight)];
+                                                             imageForUse = [UIImage resizeImage:image resizeSize:CGSizeMake(kImageWidthHeight, kImageWidthHeight)];
                                                          } else {
                                                              imageForUse = image;
                                                          }
-                                                         
-                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                                             cell.profileImage.image = imageForUse;
+                                                      
+                                                         if (imageForUse) {
                                                              
-                                                             self.cachedImages[imageURL] = imageForUse;
+                                                             [self.cachedImages setObject:imageForUse forKey:imageURL];
                                                              
-                                                             cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width/2;
-                                                             cell.profileImage.clipsToBounds = YES;
-                                                             
-                                                         });
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                                                 
+                                                                 BiographyTableViewCell *theCell = (BiographyTableViewCell*)[self.theTable cellForRowAtIndexPath:indexPath];
+
+                                                                 theCell.profileImage.image = imageForUse;
+                                                                 theCell.profileImage.layer.cornerRadius = theCell.profileImage.frame.size.width/2;
+                                                                 theCell.profileImage.clipsToBounds = YES;
+                                                             });
+                                                         }
                                                      } else {
                                                          // HANDLE ERROR //
                                                      }
